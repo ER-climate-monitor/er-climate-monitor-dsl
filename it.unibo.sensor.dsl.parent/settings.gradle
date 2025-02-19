@@ -1,0 +1,4 @@
+include 'it.unibo.sensor.dsl'
+include 'it.unibo.sensor.dsl.ide'
+include 'it.unibo.sensor.dsl.web'
+include 'it.unibo.sensor.dsl.tests'

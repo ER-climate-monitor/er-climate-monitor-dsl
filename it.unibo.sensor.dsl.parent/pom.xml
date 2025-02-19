@@ -24,9 +24,7 @@
 		<module>it.unibo.sensor.dsl</module>
 		<module>it.unibo.sensor.dsl.ide</module>
 		<module>it.unibo.sensor.dsl.ui</module>
-		<module>it.unibo.sensor.dsl.web</module>
 		<module>it.unibo.sensor.dsl.target</module>
-		<module>it.unibo.sensor.dsl.tests</module>
 		<module>it.unibo.sensor.dsl.ui.tests</module>
 	</modules>
 	<dependencyManagement>

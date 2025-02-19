@@ -1,9 +1,0 @@
-grammar it.unibo.sensor.dsl.SensorDSL with org.eclipse.xtext.common.Terminals
-
-generate sensorDSL "http://www.unibo.it/sensor/dsl/SensorDSL"
-
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
