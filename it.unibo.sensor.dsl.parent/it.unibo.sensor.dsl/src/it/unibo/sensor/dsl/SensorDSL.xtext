@@ -2,8 +2,47 @@ grammar it.unibo.sensor.dsl.SensorDSL with org.eclipse.xtext.common.Terminals
 
 generate sensorDSL "http://www.unibo.it/sensor/dsl/SensorDSL"
 
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
+SensorDefinition:
+    sensor=Sensor;
+
+Sensor:
+    '{'
+        'name' name=STRING
+        'infos' '{' infos=GeneralSensorInfo '}'
+        'network' '{' network=GeneralNetworkInfo '}'
+        'gateway' '{' gateway=GeneralGatewayInfo '}'
+        'cronjob' '{' cronjob=GeneralCronjobInfo '}'
+    '}';
+
+
+GeneralNetworkInfo:
+    'port' port=INT
+    'ip' ip=STRING;
+
+
+GeneralSensorInfo:
+    'description' description=STRING
+    'type' type=TYPES
+    'queries' '[' (query+=Query)* ']';
+
+GeneralGatewayInfo:
+    'url' url=STRING
+    'registerRoute' register=STRING
+    'shutdownRoute' shutdown=STRING
+    'detectionRoute' detection=STRING
+    'alertRoute' alert=STRING;
+
+GeneralCronjobInfo:
+    (('from' from=DAY 'to' to=DAY) | 'every' day=DAY) (('at' hour=INT ':' minute=INT) | 'every' value=INT ('hours' | 'minutes'));
+
+
+enum DAY:
+    monday='monday' | tuesday='tuesday' | wednesday = 'wednesday' | thursday = 'thursday' | friday = 'friday' | saturday = 'saturday' | sunday = 'sunday';
+
+Query:
+    '-' 'threshold' name=STRING comparator=Comparator value=INT;
+
+enum Comparator:
+    GREATER = '>' | SMALLER = '<';
+
+enum TYPES: hydro = "idro_level" | temperature = "temp" | humidity = "humidity" | wind = "wind" | rain = "rain";
