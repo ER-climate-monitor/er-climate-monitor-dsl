@@ -26,3 +26,11 @@ replay_pid*
 .gradle/
 build/
 **/META-INF/*
+
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/dictionaries/
+**/.idea/shelf/
+**/.idea/libraries/
+**/.idea/modules.xml
+**/.idea/uiDesigner.xml
