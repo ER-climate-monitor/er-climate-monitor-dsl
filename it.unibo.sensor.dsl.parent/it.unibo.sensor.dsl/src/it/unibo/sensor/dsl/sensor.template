@@ -1,0 +1,45 @@
+SensorDefinition: sensor=Sensor;
+
+Sensor:
+	'sensor' name=ID ','
+	'infos' information=GeneralSensorInfo ','
+	'network' network=GeneralNetworkInfo ','
+
+GeneralSensorInfo:
+	'description' description=STRING ','
+	'type' type=ENUM_TYPE ','
+	'queries' queries+=ENUM_QUERIES* ','
+
+GeneralNetworkInfo:
+	'port' port=INT ','
+
+
+
+Sensor {
+	name=CIAO
+	infos {
+		# Sensor's info
+		description="aaa"
+		type=idro
+		queries=[...]
+		secret=SECRETKEY
+	}
+	network {
+		# Sensor's info
+		port=8888
+		ip=string
+	}
+	gateway {
+		# Api gateway info
+		url=ip+port #with version etc etc
+		registerRoute=/register
+		shutdownRoute=/shutdown
+		detectionRoute=/aaaa
+	}
+	cronjob {
+		# Cronjob infos
+		day_of_week="0-6"
+		hour=STRING
+		minute=STRING
+	}
+}
