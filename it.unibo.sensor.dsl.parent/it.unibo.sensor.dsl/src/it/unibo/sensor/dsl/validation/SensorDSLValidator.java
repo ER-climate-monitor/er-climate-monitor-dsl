@@ -4,6 +4,7 @@
 package it.unibo.sensor.dsl.validation;
 
 
+import it.unibo.sensor.dsl.sensorDSL.GeneralNetworkInfo;
 import it.unibo.sensor.dsl.sensorDSL.Query;
 import it.unibo.sensor.dsl.sensorDSL.SensorDSLPackage;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -28,6 +29,22 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
             }
         } catch (Exception e) {
             error("The value must be a valid double.", query, SensorDSLPackage.Literals.QUERY__VALUE, 0);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureNetworkIsValid(@NonNull GeneralNetworkInfo info) {
+        final String ip = info.getIp();
+        final int port = info.getPort();
+        if (port >= 0 && port <= 1023) {
+            warning("You should use a non registered port.", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP);
+        }
+        else if (port < 0 || port > 65_535) {
+            error("The port is not valid, it must be in the interval [0, 65_535].", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__PORT);
+        }
+        if (!NetworkUtils.isValid(ip)){
+            System.out.println(ip);
+            error("The input ip must be a valid Ipv4 or Ipv6", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP);
         }
     }
 }
