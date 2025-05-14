@@ -4,6 +4,13 @@
 package it.unibo.sensor.dsl.validation;
 
 
+import it.unibo.sensor.dsl.sensorDSL.Query;
+import it.unibo.sensor.dsl.sensorDSL.SensorDSLPackage;
+import org.antlr.runtime.tree.Tree;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
+
 /**
  * This class contains custom validation rules. 
  *
@@ -21,5 +28,17 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
 //					INVALID_NAME);
 //		}
 //	}
-	
+    @Check(CheckType.FAST)
+    public void ensureThresholdValueIsValid(@NonNull Query query) {
+        final String value = query.getValue();
+        try {
+            final double doubleValue = Double.parseDouble(value);
+            final int limit = 10_000;
+            if (limit < doubleValue || doubleValue < -limit) {
+                error("The value must valid and must be in the interval [%s, %s].".formatted(-limit, limit), query, SensorDSLPackage.Literals.QUERY__VALUE, 0);
+            }
+        } catch (Exception e) {
+            error("The value must be a valid double.", query, SensorDSLPackage.Literals.QUERY__VALUE, 0);
+        }
+    }
 }
