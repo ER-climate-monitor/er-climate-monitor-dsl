@@ -9,7 +9,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
-import java.sql.Time;
 import java.util.List;
 import java.util.Objects;
 
@@ -99,6 +98,30 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
             } else if (!TimeUtils.isHourValid(value)){
                 error("The hour must be in the range [0, 23].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
             }
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureGatewayInfoAreValid(@NonNull GeneralGatewayInfo info) {
+        final String gatewayUrl = info.getUrl();
+        final String alertPath = info.getAlert();
+        final String detectionPath = info.getDetection();
+        final String shutdownPath = info.getShutdown();
+        final String registerPath = info.getRegister();
+        if (gatewayUrl.isEmpty()) {
+            error("The gateway url must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__URL);
+        }
+        if (alertPath.isEmpty()) {
+            error("The alert path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__ALERT);
+        }
+        if (detectionPath.isEmpty()) {
+            error("The detection path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__DETECTION);
+        }
+        if (shutdownPath.isEmpty()) {
+            error("The shutdown path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__SHUTDOWN);
+        }
+        if (registerPath.isEmpty()) {
+            error("The register path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__REGISTER);
         }
     }
 }
