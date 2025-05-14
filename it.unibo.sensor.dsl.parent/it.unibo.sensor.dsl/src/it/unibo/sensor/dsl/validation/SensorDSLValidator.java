@@ -4,9 +4,7 @@
 package it.unibo.sensor.dsl.validation;
 
 
-import it.unibo.sensor.dsl.sensorDSL.GeneralNetworkInfo;
-import it.unibo.sensor.dsl.sensorDSL.Query;
-import it.unibo.sensor.dsl.sensorDSL.SensorDSLPackage;
+import it.unibo.sensor.dsl.sensorDSL.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
@@ -17,6 +15,22 @@ import org.eclipse.xtext.validation.CheckType;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class SensorDSLValidator extends AbstractSensorDSLValidator {
+
+    @Check(CheckType.FAST)
+    public void ensureNameNotEmpty(@NonNull Sensor info) {
+        final String name = info.getName();
+        if (name.isEmpty()) {
+            error("The sensor's name must not be empty.", info, SensorDSLPackage.Literals.SENSOR__NAME);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureDescriptionNotEmpty(@NonNull GeneralSensorInfo info) {
+        final String description= info.getDescription();
+        if (description.isEmpty()) {
+            error("The sensor's info description must not be empty.", info, SensorDSLPackage.Literals.GENERAL_SENSOR_INFO__DESCRIPTION);
+        }
+    }
 
     @Check(CheckType.FAST)
     public void ensureThresholdValueIsValid(@NonNull Query query) {
@@ -43,7 +57,6 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
             error("The port is not valid, it must be in the interval [0, 65_535].", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__PORT);
         }
         if (!NetworkUtils.isValid(ip)){
-            System.out.println(ip);
             error("The input ip must be a valid Ipv4 or Ipv6", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP);
         }
     }
