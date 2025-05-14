@@ -9,6 +9,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
+import java.sql.Time;
+import java.util.List;
+import java.util.Objects;
+
 /**
  * This class contains custom validation rules. 
  *
@@ -29,6 +33,14 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
         final String description= info.getDescription();
         if (description.isEmpty()) {
             error("The sensor's info description must not be empty.", info, SensorDSLPackage.Literals.GENERAL_SENSOR_INFO__DESCRIPTION);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureQueryNameNotEmpty(@NonNull Query info) {
+        final String name = info.getName();
+        if (name.isEmpty()) {
+            error("The threshold's name must not be empty.", info, SensorDSLPackage.Literals.QUERY__NAME);
         }
     }
 
@@ -58,6 +70,35 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
         }
         if (!NetworkUtils.isValid(ip)){
             error("The input ip must be a valid Ipv4 or Ipv6", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureCronJobIsValid(@NonNull GeneralCronjobInfo info) {
+        final List<String> days = List.of("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
+        if (Objects.nonNull(info.getFrom())) {
+            final String fromDay = info.getFrom().toString().toLowerCase();
+            final String toDay = info.getTo().toString().toLowerCase();
+            if (days.indexOf(fromDay) > days.indexOf(toDay)) {
+                error("The end day must come after the starting day.", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__FROM);
+            }
+        }
+        final String type = info.getType().toLowerCase();
+        if (type.equals("at")) {
+            final int hour = info.getHour();
+            final int minute = info.getMinute();
+            if (!TimeUtils.isHourValid(hour) || !TimeUtils.isMinuteValid(minute)) {
+                error("The hour must be in the range [0, 23] and the minute in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__TYPE);
+            }
+        } else {
+            final int value = info.getValue();
+            final String unit = info.getUnit().toLowerCase();
+            System.out.println(unit);
+            if (unit.equals("minute") && !TimeUtils.isMinuteValid(value)) {
+                error("The minute must be in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
+            } else if (!TimeUtils.isHourValid(value)){
+                error("The hour must be in the range [0, 23].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
+            }
         }
     }
 }
