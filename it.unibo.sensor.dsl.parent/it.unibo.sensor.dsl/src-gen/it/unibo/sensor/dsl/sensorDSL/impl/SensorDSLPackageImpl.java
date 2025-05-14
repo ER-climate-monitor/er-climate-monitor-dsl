@@ -3,13 +3,20 @@
  */
 package it.unibo.sensor.dsl.sensorDSL.impl;
 
-import it.unibo.sensor.dsl.sensorDSL.Greeting;
-import it.unibo.sensor.dsl.sensorDSL.Model;
+import it.unibo.sensor.dsl.sensorDSL.Comparator;
+import it.unibo.sensor.dsl.sensorDSL.GeneralCronjobInfo;
+import it.unibo.sensor.dsl.sensorDSL.GeneralGatewayInfo;
+import it.unibo.sensor.dsl.sensorDSL.GeneralNetworkInfo;
+import it.unibo.sensor.dsl.sensorDSL.GeneralSensorInfo;
+import it.unibo.sensor.dsl.sensorDSL.Query;
+import it.unibo.sensor.dsl.sensorDSL.Sensor;
 import it.unibo.sensor.dsl.sensorDSL.SensorDSLFactory;
 import it.unibo.sensor.dsl.sensorDSL.SensorDSLPackage;
+import it.unibo.sensor.dsl.sensorDSL.SensorDefinition;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -28,14 +35,70 @@ public class SensorDSLPackageImpl extends EPackageImpl implements SensorDSLPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass modelEClass = null;
+  private EClass sensorDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass greetingEClass = null;
+  private EClass sensorEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass generalNetworkInfoEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass generalSensorInfoEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass generalGatewayInfoEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass generalCronjobInfoEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass queryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum dayEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum comparatorEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum typesEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -106,9 +169,9 @@ public class SensorDSLPackageImpl extends EPackageImpl implements SensorDSLPacka
    * @generated
    */
   @Override
-  public EClass getModel()
+  public EClass getSensorDefinition()
   {
-    return modelEClass;
+    return sensorDefinitionEClass;
   }
 
   /**
@@ -117,9 +180,9 @@ public class SensorDSLPackageImpl extends EPackageImpl implements SensorDSLPacka
    * @generated
    */
   @Override
-  public EReference getModel_Greetings()
+  public EReference getSensorDefinition_Sensor()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(0);
+    return (EReference)sensorDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -128,9 +191,9 @@ public class SensorDSLPackageImpl extends EPackageImpl implements SensorDSLPacka
    * @generated
    */
   @Override
-  public EClass getGreeting()
+  public EClass getSensor()
   {
-    return greetingEClass;
+    return sensorEClass;
   }
 
   /**
@@ -139,9 +202,350 @@ public class SensorDSLPackageImpl extends EPackageImpl implements SensorDSLPacka
    * @generated
    */
   @Override
-  public EAttribute getGreeting_Name()
+  public EAttribute getSensor_Name()
   {
-    return (EAttribute)greetingEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)sensorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getSensor_Infos()
+  {
+    return (EReference)sensorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getSensor_Network()
+  {
+    return (EReference)sensorEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getSensor_Gateway()
+  {
+    return (EReference)sensorEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getSensor_Cronjob()
+  {
+    return (EReference)sensorEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getGeneralNetworkInfo()
+  {
+    return generalNetworkInfoEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralNetworkInfo_Port()
+  {
+    return (EAttribute)generalNetworkInfoEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralNetworkInfo_Ip()
+  {
+    return (EAttribute)generalNetworkInfoEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getGeneralSensorInfo()
+  {
+    return generalSensorInfoEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralSensorInfo_Description()
+  {
+    return (EAttribute)generalSensorInfoEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralSensorInfo_Type()
+  {
+    return (EAttribute)generalSensorInfoEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getGeneralSensorInfo_Query()
+  {
+    return (EReference)generalSensorInfoEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getGeneralGatewayInfo()
+  {
+    return generalGatewayInfoEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralGatewayInfo_Url()
+  {
+    return (EAttribute)generalGatewayInfoEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralGatewayInfo_Register()
+  {
+    return (EAttribute)generalGatewayInfoEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralGatewayInfo_Shutdown()
+  {
+    return (EAttribute)generalGatewayInfoEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralGatewayInfo_Detection()
+  {
+    return (EAttribute)generalGatewayInfoEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralGatewayInfo_Alert()
+  {
+    return (EAttribute)generalGatewayInfoEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getGeneralCronjobInfo()
+  {
+    return generalCronjobInfoEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralCronjobInfo_From()
+  {
+    return (EAttribute)generalCronjobInfoEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralCronjobInfo_To()
+  {
+    return (EAttribute)generalCronjobInfoEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralCronjobInfo_Day()
+  {
+    return (EAttribute)generalCronjobInfoEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralCronjobInfo_Hour()
+  {
+    return (EAttribute)generalCronjobInfoEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralCronjobInfo_Minute()
+  {
+    return (EAttribute)generalCronjobInfoEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getGeneralCronjobInfo_Value()
+  {
+    return (EAttribute)generalCronjobInfoEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getQuery()
+  {
+    return queryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getQuery_Name()
+  {
+    return (EAttribute)queryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getQuery_Comparator()
+  {
+    return (EAttribute)queryEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getQuery_Value()
+  {
+    return (EAttribute)queryEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEnum getDAY()
+  {
+    return dayEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEnum getComparator()
+  {
+    return comparatorEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEnum getTYPES()
+  {
+    return typesEEnum;
   }
 
   /**
@@ -175,11 +579,49 @@ public class SensorDSLPackageImpl extends EPackageImpl implements SensorDSLPacka
     isCreated = true;
 
     // Create classes and their features
-    modelEClass = createEClass(MODEL);
-    createEReference(modelEClass, MODEL__GREETINGS);
+    sensorDefinitionEClass = createEClass(SENSOR_DEFINITION);
+    createEReference(sensorDefinitionEClass, SENSOR_DEFINITION__SENSOR);
 
-    greetingEClass = createEClass(GREETING);
-    createEAttribute(greetingEClass, GREETING__NAME);
+    sensorEClass = createEClass(SENSOR);
+    createEAttribute(sensorEClass, SENSOR__NAME);
+    createEReference(sensorEClass, SENSOR__INFOS);
+    createEReference(sensorEClass, SENSOR__NETWORK);
+    createEReference(sensorEClass, SENSOR__GATEWAY);
+    createEReference(sensorEClass, SENSOR__CRONJOB);
+
+    generalNetworkInfoEClass = createEClass(GENERAL_NETWORK_INFO);
+    createEAttribute(generalNetworkInfoEClass, GENERAL_NETWORK_INFO__PORT);
+    createEAttribute(generalNetworkInfoEClass, GENERAL_NETWORK_INFO__IP);
+
+    generalSensorInfoEClass = createEClass(GENERAL_SENSOR_INFO);
+    createEAttribute(generalSensorInfoEClass, GENERAL_SENSOR_INFO__DESCRIPTION);
+    createEAttribute(generalSensorInfoEClass, GENERAL_SENSOR_INFO__TYPE);
+    createEReference(generalSensorInfoEClass, GENERAL_SENSOR_INFO__QUERY);
+
+    generalGatewayInfoEClass = createEClass(GENERAL_GATEWAY_INFO);
+    createEAttribute(generalGatewayInfoEClass, GENERAL_GATEWAY_INFO__URL);
+    createEAttribute(generalGatewayInfoEClass, GENERAL_GATEWAY_INFO__REGISTER);
+    createEAttribute(generalGatewayInfoEClass, GENERAL_GATEWAY_INFO__SHUTDOWN);
+    createEAttribute(generalGatewayInfoEClass, GENERAL_GATEWAY_INFO__DETECTION);
+    createEAttribute(generalGatewayInfoEClass, GENERAL_GATEWAY_INFO__ALERT);
+
+    generalCronjobInfoEClass = createEClass(GENERAL_CRONJOB_INFO);
+    createEAttribute(generalCronjobInfoEClass, GENERAL_CRONJOB_INFO__FROM);
+    createEAttribute(generalCronjobInfoEClass, GENERAL_CRONJOB_INFO__TO);
+    createEAttribute(generalCronjobInfoEClass, GENERAL_CRONJOB_INFO__DAY);
+    createEAttribute(generalCronjobInfoEClass, GENERAL_CRONJOB_INFO__HOUR);
+    createEAttribute(generalCronjobInfoEClass, GENERAL_CRONJOB_INFO__MINUTE);
+    createEAttribute(generalCronjobInfoEClass, GENERAL_CRONJOB_INFO__VALUE);
+
+    queryEClass = createEClass(QUERY);
+    createEAttribute(queryEClass, QUERY__NAME);
+    createEAttribute(queryEClass, QUERY__COMPARATOR);
+    createEAttribute(queryEClass, QUERY__VALUE);
+
+    // Create enums
+    dayEEnum = createEEnum(DAY);
+    comparatorEEnum = createEEnum(COMPARATOR);
+    typesEEnum = createEEnum(TYPES);
   }
 
   /**
@@ -213,11 +655,65 @@ public class SensorDSLPackageImpl extends EPackageImpl implements SensorDSLPacka
     // Add supertypes to classes
 
     // Initialize classes and features; add operations and parameters
-    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModel_Greetings(), this.getGreeting(), null, "greetings", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(sensorDefinitionEClass, SensorDefinition.class, "SensorDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSensorDefinition_Sensor(), this.getSensor(), null, "sensor", null, 0, 1, SensorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(greetingEClass, Greeting.class, "Greeting", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getGreeting_Name(), ecorePackage.getEString(), "name", null, 0, 1, Greeting.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSensor_Name(), ecorePackage.getEString(), "name", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSensor_Infos(), this.getGeneralSensorInfo(), null, "infos", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSensor_Network(), this.getGeneralNetworkInfo(), null, "network", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSensor_Gateway(), this.getGeneralGatewayInfo(), null, "gateway", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSensor_Cronjob(), this.getGeneralCronjobInfo(), null, "cronjob", null, 0, 1, Sensor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(generalNetworkInfoEClass, GeneralNetworkInfo.class, "GeneralNetworkInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGeneralNetworkInfo_Port(), ecorePackage.getEInt(), "port", null, 0, 1, GeneralNetworkInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralNetworkInfo_Ip(), ecorePackage.getEString(), "ip", null, 0, 1, GeneralNetworkInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(generalSensorInfoEClass, GeneralSensorInfo.class, "GeneralSensorInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGeneralSensorInfo_Description(), ecorePackage.getEString(), "description", null, 0, 1, GeneralSensorInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralSensorInfo_Type(), this.getTYPES(), "type", null, 0, 1, GeneralSensorInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGeneralSensorInfo_Query(), this.getQuery(), null, "query", null, 0, -1, GeneralSensorInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(generalGatewayInfoEClass, GeneralGatewayInfo.class, "GeneralGatewayInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGeneralGatewayInfo_Url(), ecorePackage.getEString(), "url", null, 0, 1, GeneralGatewayInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralGatewayInfo_Register(), ecorePackage.getEString(), "register", null, 0, 1, GeneralGatewayInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralGatewayInfo_Shutdown(), ecorePackage.getEString(), "shutdown", null, 0, 1, GeneralGatewayInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralGatewayInfo_Detection(), ecorePackage.getEString(), "detection", null, 0, 1, GeneralGatewayInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralGatewayInfo_Alert(), ecorePackage.getEString(), "alert", null, 0, 1, GeneralGatewayInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(generalCronjobInfoEClass, GeneralCronjobInfo.class, "GeneralCronjobInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGeneralCronjobInfo_From(), this.getDAY(), "from", null, 0, 1, GeneralCronjobInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralCronjobInfo_To(), this.getDAY(), "to", null, 0, 1, GeneralCronjobInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralCronjobInfo_Day(), this.getDAY(), "day", null, 0, 1, GeneralCronjobInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralCronjobInfo_Hour(), ecorePackage.getEInt(), "hour", null, 0, 1, GeneralCronjobInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralCronjobInfo_Minute(), ecorePackage.getEInt(), "minute", null, 0, 1, GeneralCronjobInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGeneralCronjobInfo_Value(), ecorePackage.getEInt(), "value", null, 0, 1, GeneralCronjobInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(queryEClass, Query.class, "Query", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getQuery_Name(), ecorePackage.getEString(), "name", null, 0, 1, Query.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getQuery_Comparator(), this.getComparator(), "comparator", null, 0, 1, Query.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getQuery_Value(), ecorePackage.getEString(), "value", null, 0, 1, Query.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.class, "DAY");
+    addEEnumLiteral(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.MONDAY);
+    addEEnumLiteral(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.TUESDAY);
+    addEEnumLiteral(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.WEDNESDAY);
+    addEEnumLiteral(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.THURSDAY);
+    addEEnumLiteral(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.FRIDAY);
+    addEEnumLiteral(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.SATURDAY);
+    addEEnumLiteral(dayEEnum, it.unibo.sensor.dsl.sensorDSL.DAY.SUNDAY);
+
+    initEEnum(comparatorEEnum, Comparator.class, "Comparator");
+    addEEnumLiteral(comparatorEEnum, Comparator.GREATER);
+    addEEnumLiteral(comparatorEEnum, Comparator.SMALLER);
+
+    initEEnum(typesEEnum, it.unibo.sensor.dsl.sensorDSL.TYPES.class, "TYPES");
+    addEEnumLiteral(typesEEnum, it.unibo.sensor.dsl.sensorDSL.TYPES.HYDRO);
+    addEEnumLiteral(typesEEnum, it.unibo.sensor.dsl.sensorDSL.TYPES.TEMPERATURE);
+    addEEnumLiteral(typesEEnum, it.unibo.sensor.dsl.sensorDSL.TYPES.HUMIDITY);
+    addEEnumLiteral(typesEEnum, it.unibo.sensor.dsl.sensorDSL.TYPES.WIND);
+    addEEnumLiteral(typesEEnum, it.unibo.sensor.dsl.sensorDSL.TYPES.RAIN);
 
     // Create resource
     createResource(eNS_URI);

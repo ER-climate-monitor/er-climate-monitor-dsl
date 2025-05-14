@@ -73,17 +73,52 @@ public class SensorDSLSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
-      case SensorDSLPackage.MODEL:
+      case SensorDSLPackage.SENSOR_DEFINITION:
       {
-        Model model = (Model)theEObject;
-        T result = caseModel(model);
+        SensorDefinition sensorDefinition = (SensorDefinition)theEObject;
+        T result = caseSensorDefinition(sensorDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SensorDSLPackage.GREETING:
+      case SensorDSLPackage.SENSOR:
       {
-        Greeting greeting = (Greeting)theEObject;
-        T result = caseGreeting(greeting);
+        Sensor sensor = (Sensor)theEObject;
+        T result = caseSensor(sensor);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SensorDSLPackage.GENERAL_NETWORK_INFO:
+      {
+        GeneralNetworkInfo generalNetworkInfo = (GeneralNetworkInfo)theEObject;
+        T result = caseGeneralNetworkInfo(generalNetworkInfo);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SensorDSLPackage.GENERAL_SENSOR_INFO:
+      {
+        GeneralSensorInfo generalSensorInfo = (GeneralSensorInfo)theEObject;
+        T result = caseGeneralSensorInfo(generalSensorInfo);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SensorDSLPackage.GENERAL_GATEWAY_INFO:
+      {
+        GeneralGatewayInfo generalGatewayInfo = (GeneralGatewayInfo)theEObject;
+        T result = caseGeneralGatewayInfo(generalGatewayInfo);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SensorDSLPackage.GENERAL_CRONJOB_INFO:
+      {
+        GeneralCronjobInfo generalCronjobInfo = (GeneralCronjobInfo)theEObject;
+        T result = caseGeneralCronjobInfo(generalCronjobInfo);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SensorDSLPackage.QUERY:
+      {
+        Query query = (Query)theEObject;
+        T result = caseQuery(query);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -92,33 +127,113 @@ public class SensorDSLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Sensor Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Sensor Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseModel(Model object)
+  public T caseSensorDefinition(SensorDefinition object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Greeting</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Sensor</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Greeting</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Sensor</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseGreeting(Greeting object)
+  public T caseSensor(Sensor object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>General Network Info</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>General Network Info</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGeneralNetworkInfo(GeneralNetworkInfo object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>General Sensor Info</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>General Sensor Info</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGeneralSensorInfo(GeneralSensorInfo object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>General Gateway Info</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>General Gateway Info</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGeneralGatewayInfo(GeneralGatewayInfo object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>General Cronjob Info</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>General Cronjob Info</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGeneralCronjobInfo(GeneralCronjobInfo object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Query</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Query</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseQuery(Query object)
   {
     return null;
   }

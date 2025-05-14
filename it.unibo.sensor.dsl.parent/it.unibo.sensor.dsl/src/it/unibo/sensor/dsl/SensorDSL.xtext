@@ -40,7 +40,7 @@ enum DAY:
     monday='monday' | tuesday='tuesday' | wednesday = 'wednesday' | thursday = 'thursday' | friday = 'friday' | saturday = 'saturday' | sunday = 'sunday';
 
 Query:
-    '-' 'threshold' name=STRING comparator=Comparator value=INT;
+    '-' 'threshold' name=STRING comparator=Comparator value=STRING;
 
 enum Comparator:
     GREATER = '>' | SMALLER = '<';

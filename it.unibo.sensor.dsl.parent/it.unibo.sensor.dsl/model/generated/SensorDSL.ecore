@@ -2,11 +2,69 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sensorDSL" nsURI="http://www.unibo.it/sensor/dsl/SensorDSL"
     nsPrefix="sensorDSL">
-  <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="greetings" upperBound="-1"
-        eType="#//Greeting" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensor" eType="#//Sensor"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Greeting">
+  <eClassifiers xsi:type="ecore:EClass" name="Sensor">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="infos" eType="#//GeneralSensorInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="network" eType="#//GeneralNetworkInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gateway" eType="#//GeneralGatewayInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cronjob" eType="#//GeneralCronjobInfo"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralNetworkInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ip" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralSensorInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TYPES"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="query" upperBound="-1"
+        eType="#//Query" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralGatewayInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="register" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shutdown" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="detection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alert" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralCronjobInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="#//DAY"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="#//DAY"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" eType="#//DAY"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DAY">
+    <eLiterals name="monday" literal="monday"/>
+    <eLiterals name="tuesday" value="1" literal="tuesday"/>
+    <eLiterals name="wednesday" value="2" literal="wednesday"/>
+    <eLiterals name="thursday" value="3" literal="thursday"/>
+    <eLiterals name="friday" value="4" literal="friday"/>
+    <eLiterals name="saturday" value="5" literal="saturday"/>
+    <eLiterals name="sunday" value="6" literal="sunday"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Query">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparator" eType="#//Comparator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Comparator">
+    <eLiterals name="GREATER" literal=">"/>
+    <eLiterals name="SMALLER" value="1" literal="&lt;"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TYPES">
+    <eLiterals name="hydro" literal="idro_level"/>
+    <eLiterals name="temperature" value="1" literal="temp"/>
+    <eLiterals name="humidity" value="2" literal="humidity"/>
+    <eLiterals name="wind" value="3" literal="wind"/>
+    <eLiterals name="rain" value="4" literal="rain"/>
   </eClassifiers>
 </ecore:EPackage>

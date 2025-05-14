@@ -11,6 +11,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
@@ -18,10 +21,12 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class SensorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SensorDSLGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_GeneralCronjobInfo_HoursKeyword_1_1_2_0_or_MinutesKeyword_1_1_2_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SensorDSLGrammarAccess) access;
+		match_GeneralCronjobInfo_HoursKeyword_1_1_2_0_or_MinutesKeyword_1_1_2_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getGeneralCronjobInfoAccess().getHoursKeyword_1_1_2_0()), new TokenAlias(false, false, grammarAccess.getGeneralCronjobInfoAccess().getMinutesKeyword_1_1_2_1()));
 	}
 	
 	@Override
@@ -36,8 +41,24 @@ public class SensorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_GeneralCronjobInfo_HoursKeyword_1_1_2_0_or_MinutesKeyword_1_1_2_1.equals(syntax))
+				emit_GeneralCronjobInfo_HoursKeyword_1_1_2_0_or_MinutesKeyword_1_1_2_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     'hours' | 'minutes'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     value=INT (ambiguity) (rule end)
+	 
+	 * </pre>
+	 */
+	protected void emit_GeneralCronjobInfo_HoursKeyword_1_1_2_0_or_MinutesKeyword_1_1_2_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

@@ -4,9 +4,14 @@
 package it.unibo.sensor.dsl.serializer;
 
 import com.google.inject.Inject;
-import it.unibo.sensor.dsl.sensorDSL.Greeting;
-import it.unibo.sensor.dsl.sensorDSL.Model;
+import it.unibo.sensor.dsl.sensorDSL.GeneralCronjobInfo;
+import it.unibo.sensor.dsl.sensorDSL.GeneralGatewayInfo;
+import it.unibo.sensor.dsl.sensorDSL.GeneralNetworkInfo;
+import it.unibo.sensor.dsl.sensorDSL.GeneralSensorInfo;
+import it.unibo.sensor.dsl.sensorDSL.Query;
+import it.unibo.sensor.dsl.sensorDSL.Sensor;
 import it.unibo.sensor.dsl.sensorDSL.SensorDSLPackage;
+import it.unibo.sensor.dsl.sensorDSL.SensorDefinition;
 import it.unibo.sensor.dsl.services.SensorDSLGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -33,11 +38,26 @@ public class SensorDSLSemanticSequencer extends AbstractDelegatingSemanticSequen
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == SensorDSLPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case SensorDSLPackage.GREETING:
-				sequence_Greeting(context, (Greeting) semanticObject); 
+			case SensorDSLPackage.GENERAL_CRONJOB_INFO:
+				sequence_GeneralCronjobInfo(context, (GeneralCronjobInfo) semanticObject); 
 				return; 
-			case SensorDSLPackage.MODEL:
-				sequence_Model(context, (Model) semanticObject); 
+			case SensorDSLPackage.GENERAL_GATEWAY_INFO:
+				sequence_GeneralGatewayInfo(context, (GeneralGatewayInfo) semanticObject); 
+				return; 
+			case SensorDSLPackage.GENERAL_NETWORK_INFO:
+				sequence_GeneralNetworkInfo(context, (GeneralNetworkInfo) semanticObject); 
+				return; 
+			case SensorDSLPackage.GENERAL_SENSOR_INFO:
+				sequence_GeneralSensorInfo(context, (GeneralSensorInfo) semanticObject); 
+				return; 
+			case SensorDSLPackage.QUERY:
+				sequence_Query(context, (Query) semanticObject); 
+				return; 
+			case SensorDSLPackage.SENSOR:
+				sequence_Sensor(context, (Sensor) semanticObject); 
+				return; 
+			case SensorDSLPackage.SENSOR_DEFINITION:
+				sequence_SensorDefinition(context, (SensorDefinition) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -47,19 +67,45 @@ public class SensorDSLSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Greeting returns Greeting
+	 *     GeneralCronjobInfo returns GeneralCronjobInfo
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (((from=DAY to=DAY) | day=DAY) ((hour=INT minute=INT) | value=INT))
 	 * </pre>
 	 */
-	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
+	protected void sequence_GeneralCronjobInfo(ISerializationContext context, GeneralCronjobInfo semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     GeneralGatewayInfo returns GeneralGatewayInfo
+	 *
+	 * Constraint:
+	 *     (url=STRING register=STRING shutdown=STRING detection=STRING alert=STRING)
+	 * </pre>
+	 */
+	protected void sequence_GeneralGatewayInfo(ISerializationContext context, GeneralGatewayInfo semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GREETING__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GREETING__NAME));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__URL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__URL));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__REGISTER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__REGISTER));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__SHUTDOWN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__SHUTDOWN));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__DETECTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__DETECTION));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__ALERT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__ALERT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getGeneralGatewayInfoAccess().getUrlSTRINGTerminalRuleCall_1_0(), semanticObject.getUrl());
+		feeder.accept(grammarAccess.getGeneralGatewayInfoAccess().getRegisterSTRINGTerminalRuleCall_3_0(), semanticObject.getRegister());
+		feeder.accept(grammarAccess.getGeneralGatewayInfoAccess().getShutdownSTRINGTerminalRuleCall_5_0(), semanticObject.getShutdown());
+		feeder.accept(grammarAccess.getGeneralGatewayInfoAccess().getDetectionSTRINGTerminalRuleCall_7_0(), semanticObject.getDetection());
+		feeder.accept(grammarAccess.getGeneralGatewayInfoAccess().getAlertSTRINGTerminalRuleCall_9_0(), semanticObject.getAlert());
 		feeder.finish();
 	}
 	
@@ -67,14 +113,115 @@ public class SensorDSLSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Model returns Model
+	 *     GeneralNetworkInfo returns GeneralNetworkInfo
 	 *
 	 * Constraint:
-	 *     greetings+=Greeting+
+	 *     (port=INT ip=STRING)
 	 * </pre>
 	 */
-	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
+	protected void sequence_GeneralNetworkInfo(ISerializationContext context, GeneralNetworkInfo semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__PORT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__PORT));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGeneralNetworkInfoAccess().getPortINTTerminalRuleCall_1_0(), semanticObject.getPort());
+		feeder.accept(grammarAccess.getGeneralNetworkInfoAccess().getIpSTRINGTerminalRuleCall_3_0(), semanticObject.getIp());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     GeneralSensorInfo returns GeneralSensorInfo
+	 *
+	 * Constraint:
+	 *     (description=STRING type=TYPES query+=Query*)
+	 * </pre>
+	 */
+	protected void sequence_GeneralSensorInfo(ISerializationContext context, GeneralSensorInfo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Query returns Query
+	 *
+	 * Constraint:
+	 *     (name=STRING comparator=Comparator value=STRING)
+	 * </pre>
+	 */
+	protected void sequence_Query(ISerializationContext context, Query semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.QUERY__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.QUERY__NAME));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.QUERY__COMPARATOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.QUERY__COMPARATOR));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.QUERY__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.QUERY__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getQueryAccess().getNameSTRINGTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getQueryAccess().getComparatorComparatorEnumRuleCall_3_0(), semanticObject.getComparator());
+		feeder.accept(grammarAccess.getQueryAccess().getValueSTRINGTerminalRuleCall_4_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     SensorDefinition returns SensorDefinition
+	 *
+	 * Constraint:
+	 *     sensor=Sensor
+	 * </pre>
+	 */
+	protected void sequence_SensorDefinition(ISerializationContext context, SensorDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.SENSOR_DEFINITION__SENSOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.SENSOR_DEFINITION__SENSOR));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSensorDefinitionAccess().getSensorSensorParserRuleCall_0(), semanticObject.getSensor());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Sensor returns Sensor
+	 *
+	 * Constraint:
+	 *     (name=STRING infos=GeneralSensorInfo network=GeneralNetworkInfo gateway=GeneralGatewayInfo cronjob=GeneralCronjobInfo)
+	 * </pre>
+	 */
+	protected void sequence_Sensor(ISerializationContext context, Sensor semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.SENSOR__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.SENSOR__NAME));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.SENSOR__INFOS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.SENSOR__INFOS));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.SENSOR__NETWORK) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.SENSOR__NETWORK));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.SENSOR__GATEWAY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.SENSOR__GATEWAY));
+			if (transientValues.isValueTransient(semanticObject, SensorDSLPackage.Literals.SENSOR__CRONJOB) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SensorDSLPackage.Literals.SENSOR__CRONJOB));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSensorAccess().getNameSTRINGTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getSensorAccess().getInfosGeneralSensorInfoParserRuleCall_5_0(), semanticObject.getInfos());
+		feeder.accept(grammarAccess.getSensorAccess().getNetworkGeneralNetworkInfoParserRuleCall_9_0(), semanticObject.getNetwork());
+		feeder.accept(grammarAccess.getSensorAccess().getGatewayGeneralGatewayInfoParserRuleCall_13_0(), semanticObject.getGateway());
+		feeder.accept(grammarAccess.getSensorAccess().getCronjobGeneralCronjobInfoParserRuleCall_17_0(), semanticObject.getCronjob());
+		feeder.finish();
 	}
 	
 	

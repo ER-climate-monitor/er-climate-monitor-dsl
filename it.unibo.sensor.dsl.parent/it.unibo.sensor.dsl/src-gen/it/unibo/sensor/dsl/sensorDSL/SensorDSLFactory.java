@@ -24,22 +24,67 @@ public interface SensorDSLFactory extends EFactory
   SensorDSLFactory eINSTANCE = it.unibo.sensor.dsl.sensorDSL.impl.SensorDSLFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Model</em>'.
+   * Returns a new object of class '<em>Sensor Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Model</em>'.
+   * @return a new object of class '<em>Sensor Definition</em>'.
    * @generated
    */
-  Model createModel();
+  SensorDefinition createSensorDefinition();
 
   /**
-   * Returns a new object of class '<em>Greeting</em>'.
+   * Returns a new object of class '<em>Sensor</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Greeting</em>'.
+   * @return a new object of class '<em>Sensor</em>'.
    * @generated
    */
-  Greeting createGreeting();
+  Sensor createSensor();
+
+  /**
+   * Returns a new object of class '<em>General Network Info</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>General Network Info</em>'.
+   * @generated
+   */
+  GeneralNetworkInfo createGeneralNetworkInfo();
+
+  /**
+   * Returns a new object of class '<em>General Sensor Info</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>General Sensor Info</em>'.
+   * @generated
+   */
+  GeneralSensorInfo createGeneralSensorInfo();
+
+  /**
+   * Returns a new object of class '<em>General Gateway Info</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>General Gateway Info</em>'.
+   * @generated
+   */
+  GeneralGatewayInfo createGeneralGatewayInfo();
+
+  /**
+   * Returns a new object of class '<em>General Cronjob Info</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>General Cronjob Info</em>'.
+   * @generated
+   */
+  GeneralCronjobInfo createGeneralCronjobInfo();
+
+  /**
+   * Returns a new object of class '<em>Query</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Query</em>'.
+   * @generated
+   */
+  Query createQuery();
 
   /**
    * Returns the package supported by this factory.
