@@ -33,7 +33,7 @@ GeneralGatewayInfo:
     'alertRoute' alert=STRING;
 
 GeneralCronjobInfo:
-    (('from' from=DAY 'to' to=DAY) | 'every' day=DAY) (('at' hour=INT ':' minute=INT) | 'every' value=INT ('hours' | 'minutes'));
+    (('from' from=DAY 'to' to=DAY) | 'every' day=DAY) ((type='at' hour=INT ':' minute=INT) | type='every' value=INT unit=('hours' | 'minutes'));
 
 
 enum DAY:
