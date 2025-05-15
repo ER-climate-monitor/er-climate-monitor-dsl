@@ -221,3 +221,5 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/xtext,gradle,eclipse,intellij
+
+sensor_*.py
