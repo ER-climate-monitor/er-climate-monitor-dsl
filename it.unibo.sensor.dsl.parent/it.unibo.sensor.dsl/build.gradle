@@ -1,3 +1,11 @@
+plugins {
+	id 'application'
+}
+
+application {
+	mainClass = 'it.unibo.sensor.dsl.generator.SensorDslGeneratorLauncher'
+}
+
 dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-api'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
