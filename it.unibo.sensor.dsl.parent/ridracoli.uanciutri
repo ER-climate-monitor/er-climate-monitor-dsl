@@ -5,6 +5,7 @@
         type idro_level
         queries [
             - threshold "soglia90%" > "570"
+            - threshold "soglia100%" > "575"
         ]
     }
     
