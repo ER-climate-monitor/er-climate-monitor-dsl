@@ -15,16 +15,10 @@ Workflow {
 				runtimeTest = {
 					enabled = true
 				}
-				eclipsePlugin = {
-					enabled = true
-				}
-				eclipsePluginTest = {
-					enabled = true
-				}
 				web = {
 					enabled = true
 				}
-				createEclipseMetaData = true
+				mavenLayout = true
 			}
 			code = {
 				encoding = "UTF-8"

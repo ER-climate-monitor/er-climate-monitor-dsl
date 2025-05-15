@@ -4,8 +4,15 @@
 package it.unibo.sensor.dsl;
 
 
+import it.unibo.sensor.dsl.generator.SensorGenerator;
+import org.eclipse.xtext.generator.IGenerator2;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class SensorDSLRuntimeModule extends AbstractSensorDSLRuntimeModule {
+    @Override
+    public Class<? extends IGenerator2> bindIGenerator2() {
+        return SensorGenerator.class;
+    }
 }
