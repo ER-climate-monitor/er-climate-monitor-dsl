@@ -76,14 +76,39 @@ public class SensorDSLAdapterFactory extends AdapterFactoryImpl
     new SensorDSLSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModel(Model object)
+      public Adapter caseSensorDefinition(SensorDefinition object)
       {
-        return createModelAdapter();
+        return createSensorDefinitionAdapter();
       }
       @Override
-      public Adapter caseGreeting(Greeting object)
+      public Adapter caseSensor(Sensor object)
       {
-        return createGreetingAdapter();
+        return createSensorAdapter();
+      }
+      @Override
+      public Adapter caseGeneralNetworkInfo(GeneralNetworkInfo object)
+      {
+        return createGeneralNetworkInfoAdapter();
+      }
+      @Override
+      public Adapter caseGeneralSensorInfo(GeneralSensorInfo object)
+      {
+        return createGeneralSensorInfoAdapter();
+      }
+      @Override
+      public Adapter caseGeneralGatewayInfo(GeneralGatewayInfo object)
+      {
+        return createGeneralGatewayInfoAdapter();
+      }
+      @Override
+      public Adapter caseGeneralCronjobInfo(GeneralCronjobInfo object)
+      {
+        return createGeneralCronjobInfoAdapter();
+      }
+      @Override
+      public Adapter caseQuery(Query object)
+      {
+        return createQueryAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -108,31 +133,106 @@ public class SensorDSLAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.Model <em>Model</em>}'.
+   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.SensorDefinition <em>Sensor Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see it.unibo.sensor.dsl.sensorDSL.Model
+   * @see it.unibo.sensor.dsl.sensorDSL.SensorDefinition
    * @generated
    */
-  public Adapter createModelAdapter()
+  public Adapter createSensorDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.Greeting <em>Greeting</em>}'.
+   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.Sensor <em>Sensor</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see it.unibo.sensor.dsl.sensorDSL.Greeting
+   * @see it.unibo.sensor.dsl.sensorDSL.Sensor
    * @generated
    */
-  public Adapter createGreetingAdapter()
+  public Adapter createSensorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.GeneralNetworkInfo <em>General Network Info</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.unibo.sensor.dsl.sensorDSL.GeneralNetworkInfo
+   * @generated
+   */
+  public Adapter createGeneralNetworkInfoAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.GeneralSensorInfo <em>General Sensor Info</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.unibo.sensor.dsl.sensorDSL.GeneralSensorInfo
+   * @generated
+   */
+  public Adapter createGeneralSensorInfoAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.GeneralGatewayInfo <em>General Gateway Info</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.unibo.sensor.dsl.sensorDSL.GeneralGatewayInfo
+   * @generated
+   */
+  public Adapter createGeneralGatewayInfoAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.GeneralCronjobInfo <em>General Cronjob Info</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.unibo.sensor.dsl.sensorDSL.GeneralCronjobInfo
+   * @generated
+   */
+  public Adapter createGeneralCronjobInfoAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link it.unibo.sensor.dsl.sensorDSL.Query <em>Query</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see it.unibo.sensor.dsl.sensorDSL.Query
+   * @generated
+   */
+  public Adapter createQueryAdapter()
   {
     return null;
   }

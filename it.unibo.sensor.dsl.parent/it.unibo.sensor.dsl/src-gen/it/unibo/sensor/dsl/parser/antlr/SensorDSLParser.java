@@ -27,7 +27,7 @@ public class SensorDSLParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Model";
+		return "SensorDefinition";
 	}
 
 	public SensorDSLGrammarAccess getGrammarAccess() {

@@ -6,6 +6,7 @@ package it.unibo.sensor.dsl.sensorDSL.impl;
 import it.unibo.sensor.dsl.sensorDSL.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -65,8 +66,13 @@ public class SensorDSLFactoryImpl extends EFactoryImpl implements SensorDSLFacto
   {
     switch (eClass.getClassifierID())
     {
-      case SensorDSLPackage.MODEL: return createModel();
-      case SensorDSLPackage.GREETING: return createGreeting();
+      case SensorDSLPackage.SENSOR_DEFINITION: return createSensorDefinition();
+      case SensorDSLPackage.SENSOR: return createSensor();
+      case SensorDSLPackage.GENERAL_NETWORK_INFO: return createGeneralNetworkInfo();
+      case SensorDSLPackage.GENERAL_SENSOR_INFO: return createGeneralSensorInfo();
+      case SensorDSLPackage.GENERAL_GATEWAY_INFO: return createGeneralGatewayInfo();
+      case SensorDSLPackage.GENERAL_CRONJOB_INFO: return createGeneralCronjobInfo();
+      case SensorDSLPackage.QUERY: return createQuery();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -78,10 +84,19 @@ public class SensorDSLFactoryImpl extends EFactoryImpl implements SensorDSLFacto
    * @generated
    */
   @Override
-  public Model createModel()
+  public Object createFromString(EDataType eDataType, String initialValue)
   {
-    ModelImpl model = new ModelImpl();
-    return model;
+    switch (eDataType.getClassifierID())
+    {
+      case SensorDSLPackage.DAY:
+        return createDAYFromString(eDataType, initialValue);
+      case SensorDSLPackage.COMPARATOR:
+        return createComparatorFromString(eDataType, initialValue);
+      case SensorDSLPackage.TYPES:
+        return createTYPESFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
   }
 
   /**
@@ -90,10 +105,169 @@ public class SensorDSLFactoryImpl extends EFactoryImpl implements SensorDSLFacto
    * @generated
    */
   @Override
-  public Greeting createGreeting()
+  public String convertToString(EDataType eDataType, Object instanceValue)
   {
-    GreetingImpl greeting = new GreetingImpl();
-    return greeting;
+    switch (eDataType.getClassifierID())
+    {
+      case SensorDSLPackage.DAY:
+        return convertDAYToString(eDataType, instanceValue);
+      case SensorDSLPackage.COMPARATOR:
+        return convertComparatorToString(eDataType, instanceValue);
+      case SensorDSLPackage.TYPES:
+        return convertTYPESToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SensorDefinition createSensorDefinition()
+  {
+    SensorDefinitionImpl sensorDefinition = new SensorDefinitionImpl();
+    return sensorDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Sensor createSensor()
+  {
+    SensorImpl sensor = new SensorImpl();
+    return sensor;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GeneralNetworkInfo createGeneralNetworkInfo()
+  {
+    GeneralNetworkInfoImpl generalNetworkInfo = new GeneralNetworkInfoImpl();
+    return generalNetworkInfo;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GeneralSensorInfo createGeneralSensorInfo()
+  {
+    GeneralSensorInfoImpl generalSensorInfo = new GeneralSensorInfoImpl();
+    return generalSensorInfo;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GeneralGatewayInfo createGeneralGatewayInfo()
+  {
+    GeneralGatewayInfoImpl generalGatewayInfo = new GeneralGatewayInfoImpl();
+    return generalGatewayInfo;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GeneralCronjobInfo createGeneralCronjobInfo()
+  {
+    GeneralCronjobInfoImpl generalCronjobInfo = new GeneralCronjobInfoImpl();
+    return generalCronjobInfo;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Query createQuery()
+  {
+    QueryImpl query = new QueryImpl();
+    return query;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DAY createDAYFromString(EDataType eDataType, String initialValue)
+  {
+    DAY result = DAY.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertDAYToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Comparator createComparatorFromString(EDataType eDataType, String initialValue)
+  {
+    Comparator result = Comparator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertComparatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TYPES createTYPESFromString(EDataType eDataType, String initialValue)
+  {
+    TYPES result = TYPES.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertTYPESToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

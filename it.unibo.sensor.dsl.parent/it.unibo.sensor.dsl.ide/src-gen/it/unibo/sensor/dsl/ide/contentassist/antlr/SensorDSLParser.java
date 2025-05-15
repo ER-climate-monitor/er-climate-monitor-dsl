@@ -31,9 +31,47 @@ public class SensorDSLParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, SensorDSLGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getGreetingAccess().getGroup(), "rule__Greeting__Group__0");
-			builder.put(grammarAccess.getModelAccess().getGreetingsAssignment(), "rule__Model__GreetingsAssignment");
-			builder.put(grammarAccess.getGreetingAccess().getNameAssignment_1(), "rule__Greeting__NameAssignment_1");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getAlternatives_0(), "rule__GeneralCronjobInfo__Alternatives_0");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getAlternatives_1(), "rule__GeneralCronjobInfo__Alternatives_1");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getAlternatives_1_1_2(), "rule__GeneralCronjobInfo__Alternatives_1_1_2");
+			builder.put(grammarAccess.getDAYAccess().getAlternatives(), "rule__DAY__Alternatives");
+			builder.put(grammarAccess.getComparatorAccess().getAlternatives(), "rule__Comparator__Alternatives");
+			builder.put(grammarAccess.getTYPESAccess().getAlternatives(), "rule__TYPES__Alternatives");
+			builder.put(grammarAccess.getSensorAccess().getGroup(), "rule__Sensor__Group__0");
+			builder.put(grammarAccess.getGeneralNetworkInfoAccess().getGroup(), "rule__GeneralNetworkInfo__Group__0");
+			builder.put(grammarAccess.getGeneralSensorInfoAccess().getGroup(), "rule__GeneralSensorInfo__Group__0");
+			builder.put(grammarAccess.getGeneralGatewayInfoAccess().getGroup(), "rule__GeneralGatewayInfo__Group__0");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getGroup(), "rule__GeneralCronjobInfo__Group__0");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getGroup_0_0(), "rule__GeneralCronjobInfo__Group_0_0__0");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getGroup_0_1(), "rule__GeneralCronjobInfo__Group_0_1__0");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getGroup_1_0(), "rule__GeneralCronjobInfo__Group_1_0__0");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getGroup_1_1(), "rule__GeneralCronjobInfo__Group_1_1__0");
+			builder.put(grammarAccess.getQueryAccess().getGroup(), "rule__Query__Group__0");
+			builder.put(grammarAccess.getSensorDefinitionAccess().getSensorAssignment(), "rule__SensorDefinition__SensorAssignment");
+			builder.put(grammarAccess.getSensorAccess().getNameAssignment_2(), "rule__Sensor__NameAssignment_2");
+			builder.put(grammarAccess.getSensorAccess().getInfosAssignment_5(), "rule__Sensor__InfosAssignment_5");
+			builder.put(grammarAccess.getSensorAccess().getNetworkAssignment_9(), "rule__Sensor__NetworkAssignment_9");
+			builder.put(grammarAccess.getSensorAccess().getGatewayAssignment_13(), "rule__Sensor__GatewayAssignment_13");
+			builder.put(grammarAccess.getSensorAccess().getCronjobAssignment_17(), "rule__Sensor__CronjobAssignment_17");
+			builder.put(grammarAccess.getGeneralNetworkInfoAccess().getPortAssignment_1(), "rule__GeneralNetworkInfo__PortAssignment_1");
+			builder.put(grammarAccess.getGeneralNetworkInfoAccess().getIpAssignment_3(), "rule__GeneralNetworkInfo__IpAssignment_3");
+			builder.put(grammarAccess.getGeneralSensorInfoAccess().getDescriptionAssignment_1(), "rule__GeneralSensorInfo__DescriptionAssignment_1");
+			builder.put(grammarAccess.getGeneralSensorInfoAccess().getTypeAssignment_3(), "rule__GeneralSensorInfo__TypeAssignment_3");
+			builder.put(grammarAccess.getGeneralSensorInfoAccess().getQueryAssignment_6(), "rule__GeneralSensorInfo__QueryAssignment_6");
+			builder.put(grammarAccess.getGeneralGatewayInfoAccess().getUrlAssignment_1(), "rule__GeneralGatewayInfo__UrlAssignment_1");
+			builder.put(grammarAccess.getGeneralGatewayInfoAccess().getRegisterAssignment_3(), "rule__GeneralGatewayInfo__RegisterAssignment_3");
+			builder.put(grammarAccess.getGeneralGatewayInfoAccess().getShutdownAssignment_5(), "rule__GeneralGatewayInfo__ShutdownAssignment_5");
+			builder.put(grammarAccess.getGeneralGatewayInfoAccess().getDetectionAssignment_7(), "rule__GeneralGatewayInfo__DetectionAssignment_7");
+			builder.put(grammarAccess.getGeneralGatewayInfoAccess().getAlertAssignment_9(), "rule__GeneralGatewayInfo__AlertAssignment_9");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getFromAssignment_0_0_1(), "rule__GeneralCronjobInfo__FromAssignment_0_0_1");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getToAssignment_0_0_3(), "rule__GeneralCronjobInfo__ToAssignment_0_0_3");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getDayAssignment_0_1_1(), "rule__GeneralCronjobInfo__DayAssignment_0_1_1");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getHourAssignment_1_0_1(), "rule__GeneralCronjobInfo__HourAssignment_1_0_1");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getMinuteAssignment_1_0_3(), "rule__GeneralCronjobInfo__MinuteAssignment_1_0_3");
+			builder.put(grammarAccess.getGeneralCronjobInfoAccess().getValueAssignment_1_1_1(), "rule__GeneralCronjobInfo__ValueAssignment_1_1_1");
+			builder.put(grammarAccess.getQueryAccess().getNameAssignment_2(), "rule__Query__NameAssignment_2");
+			builder.put(grammarAccess.getQueryAccess().getComparatorAssignment_3(), "rule__Query__ComparatorAssignment_3");
+			builder.put(grammarAccess.getQueryAccess().getValueAssignment_4(), "rule__Query__ValueAssignment_4");
 		}
 	}
 	

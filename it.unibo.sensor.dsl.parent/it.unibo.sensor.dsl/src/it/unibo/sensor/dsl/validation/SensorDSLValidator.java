@@ -7,27 +7,44 @@ package it.unibo.sensor.dsl.validation;
 import it.unibo.sensor.dsl.sensorDSL.Query;
 import it.unibo.sensor.dsl.sensorDSL.SensorDSLPackage;
 import org.antlr.runtime.tree.Tree;
+import it.unibo.sensor.dsl.sensorDSL.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
+import java.util.List;
+import java.util.Objects;
 /**
  * This class contains custom validation rules. 
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class SensorDSLValidator extends AbstractSensorDSLValidator {
-	
-//	public static final String INVALID_NAME = "invalidName";
-//
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital",
-//					SensorDSLPackage.Literals.GREETING__NAME,
-//					INVALID_NAME);
-//		}
-//	}
+
+    @Check(CheckType.FAST)
+    public void ensureNameNotEmpty(@NonNull Sensor info) {
+        final String name = info.getName();
+        if (name.isEmpty()) {
+            error("The sensor's name must not be empty.", info, SensorDSLPackage.Literals.SENSOR__NAME);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureDescriptionNotEmpty(@NonNull GeneralSensorInfo info) {
+        final String description= info.getDescription();
+        if (description.isEmpty()) {
+            error("The sensor's info description must not be empty.", info, SensorDSLPackage.Literals.GENERAL_SENSOR_INFO__DESCRIPTION);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureQueryNameNotEmpty(@NonNull Query info) {
+        final String name = info.getName();
+        if (name.isEmpty()) {
+            error("The threshold's name must not be empty.", info, SensorDSLPackage.Literals.QUERY__NAME);
+        }
+    }
+
     @Check(CheckType.FAST)
     public void ensureThresholdValueIsValid(@NonNull Query query) {
         final String value = query.getValue();
@@ -39,6 +56,74 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
             }
         } catch (Exception e) {
             error("The value must be a valid double.", query, SensorDSLPackage.Literals.QUERY__VALUE, 0);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureNetworkIsValid(@NonNull GeneralNetworkInfo info) {
+        final String ip = info.getIp();
+        final int port = info.getPort();
+        if (port >= 0 && port <= 1023) {
+            warning("You should use a non registered port.", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP);
+        }
+        else if (port < 0 || port > 65_535) {
+            error("The port is not valid, it must be in the interval [0, 65_535].", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__PORT);
+        }
+        if (!NetworkUtils.isValid(ip)){
+            error("The input ip must be a valid Ipv4 or Ipv6", info, SensorDSLPackage.Literals.GENERAL_NETWORK_INFO__IP);
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureCronJobIsValid(@NonNull GeneralCronjobInfo info) {
+        final List<String> days = List.of("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
+        if (Objects.nonNull(info.getFrom())) {
+            final String fromDay = info.getFrom().toString().toLowerCase();
+            final String toDay = info.getTo().toString().toLowerCase();
+            if (days.indexOf(fromDay) > days.indexOf(toDay)) {
+                error("The end day must come after the starting day.", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__FROM);
+            }
+        }
+        final String type = info.getType().toLowerCase();
+        if (type.equals("at")) {
+            final int hour = info.getHour();
+            final int minute = info.getMinute();
+            if (!TimeUtils.isHourValid(hour) || !TimeUtils.isMinuteValid(minute)) {
+                error("The hour must be in the range [0, 23] and the minute in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__TYPE);
+            }
+        } else {
+            final int value = info.getValue();
+            final String unit = info.getUnit().toLowerCase();
+            System.out.println(unit);
+            if (unit.equals("minute") && !TimeUtils.isMinuteValid(value)) {
+                error("The minute must be in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
+            } else if (!TimeUtils.isHourValid(value)){
+                error("The hour must be in the range [0, 23].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
+            }
+        }
+    }
+
+    @Check(CheckType.FAST)
+    public void ensureGatewayInfoAreValid(@NonNull GeneralGatewayInfo info) {
+        final String gatewayUrl = info.getUrl();
+        final String alertPath = info.getAlert();
+        final String detectionPath = info.getDetection();
+        final String shutdownPath = info.getShutdown();
+        final String registerPath = info.getRegister();
+        if (gatewayUrl.isEmpty()) {
+            error("The gateway url must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__URL);
+        }
+        if (alertPath.isEmpty()) {
+            error("The alert path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__ALERT);
+        }
+        if (detectionPath.isEmpty()) {
+            error("The detection path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__DETECTION);
+        }
+        if (shutdownPath.isEmpty()) {
+            error("The shutdown path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__SHUTDOWN);
+        }
+        if (registerPath.isEmpty()) {
+            error("The register path must not be empty.", info, SensorDSLPackage.Literals.GENERAL_GATEWAY_INFO__REGISTER);
         }
     }
 }
