@@ -16,7 +16,7 @@ public class SensorGenerator extends AbstractSensorGenerator {
     public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
         final File inFile = new File(input.getURI().toFileString());
         final SensorDefinition sensorDefinition = (SensorDefinition) input.getContents().get(0);
-        final String inFileName = inFile.getName().replaceAll("[^a-zA-Z0-9-_]", "_");
+        final String inFileName = inFile.getName().split("\\.")[0];
         try {
             var template = pythonTemplateFile("Sensor");
             final  var replacements = List.of(
@@ -43,6 +43,7 @@ public class SensorGenerator extends AbstractSensorGenerator {
     private Map<String, String> getGatewayInfoReplacements(final GeneralGatewayInfo gateway) {
         return Map.of(
                 "SENSOR_APIGATEWAY_URL", gateway.getUrl(),
+                "SENSOR_APIGATEWAY_PORT", String.valueOf(gateway.getPort()),
                 "SENSOR_REGISTRY_REGISTERPATH", gateway.getRegister(),
                 "SENSOR_REGISTRY_SHUTDOWNPATH", gateway.getShutdown(),
                 "SENSOR_ALERTPATH", gateway.getAlert(),
@@ -84,6 +85,7 @@ public class SensorGenerator extends AbstractSensorGenerator {
      * that matches the expected format in the template).
      */
     private String getFormattedQueries(final List<Query> queries) {
-        return queries.stream().map(Query::getName).collect(Collectors.joining(", "));
+        final var qs = queries.stream().map(q -> "\"" + q.getName() + "\"").collect(Collectors.joining(", "));
+        return String.format("[ %s ]", qs);
     }
 }
