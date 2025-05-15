@@ -3,6 +3,9 @@ dependencies {
 	api "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
 	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
 }
-//this is an eclipse plugin project
-eclipseClasspath.enabled=false
-cleanEclipseClasspath.enabled=false
+
+apply plugin: 'application'
+application {
+	mainClass = "org.eclipse.xtext.ide.server.ServerLauncher"
+}
+

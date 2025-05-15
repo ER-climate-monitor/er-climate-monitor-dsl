@@ -14,6 +14,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="gateway" eType="#//GeneralGatewayInfo"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="registry" eType="#//SensorRegistryInfo"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cronjob" eType="#//GeneralCronjobInfo"
         containment="true"/>
   </eClassifiers>
@@ -29,18 +31,25 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneralGatewayInfo">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="register" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shutdown" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="detection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alert" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorRegistryInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="registryUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="apiKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneralCronjobInfo">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="#//DAY"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="#//DAY"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" eType="#//DAY"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DAY">
     <eLiterals name="monday" literal="monday"/>
