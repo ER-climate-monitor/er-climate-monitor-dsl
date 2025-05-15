@@ -1,4 +1,9 @@
 dependencies {
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 	api "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
 	api "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
 }
@@ -18,18 +23,18 @@ dependencies {
 task generateXtextLanguage(type: JavaExec) {
 	mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 	classpath = configurations.mwe2
-	inputs.file "src/it/unibo/sensor/dsl/GenerateSensorDSL.mwe2"
-	inputs.file "src/it/unibo/sensor/dsl/SensorDSL.xtext"
-	outputs.dir "src-gen"
-	args += "src/it/unibo/sensor/dsl/GenerateSensorDSL.mwe2"
+	inputs.file "src/main/java/it/unibo/sensor/dsl/GenerateSensorDSL.mwe2"
+	inputs.file "src/main/java/it/unibo/sensor/dsl/SensorDSL.xtext"
+	outputs.dir "src/main/xtext-gen"
+	args += "src/main/java/it/unibo/sensor/dsl/GenerateSensorDSL.mwe2"
 	args += "-p"
 	args += "rootPath=/${projectDir}/.."
 }
 
+test {
+	useJUnitPlatform()
+}
 processResources.dependsOn(generateXtextLanguage)
 generateXtext.dependsOn(generateXtextLanguage)
 clean.dependsOn(cleanGenerateXtextLanguage)
 eclipse.classpath.plusConfigurations += [configurations.mwe2]
-//this is an eclipse plugin project
-eclipseClasspath.enabled=false
-cleanEclipseClasspath.enabled=false
