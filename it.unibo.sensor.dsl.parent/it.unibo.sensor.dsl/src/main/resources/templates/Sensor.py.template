@@ -25,7 +25,7 @@ type = "{{ SENSOR_INFORMATION_TYPE }}"
 description = "{{ SENSOR_INFORMATION_DESCRIPTION }}"
 queries = {{ SENSOR_INFORMATION_QUERIES }}
 
-ip = "{{  SENSOR_ETHERNET_IP }}"
+ip = "{{ SENSOR_ETHERNET_IP }}"
 port = {{ SENSOR_ETHERNET_PORT }}
 
 registry = "{{ SENSOR_REGISTRY_URL }}"
