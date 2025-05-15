@@ -11,14 +11,13 @@ Sensor:
         'infos' '{' infos=GeneralSensorInfo '}'
         'network' '{' network=GeneralNetworkInfo '}'
         'gateway' '{' gateway=GeneralGatewayInfo '}'
+        'registry' '{' registry=SensorRegistryInfo '}'
         'cronjob' '{' cronjob=GeneralCronjobInfo '}'
     '}';
-
 
 GeneralNetworkInfo:
     'port' port=INT
     'ip' ip=STRING;
-
 
 GeneralSensorInfo:
     'description' description=STRING
@@ -27,10 +26,15 @@ GeneralSensorInfo:
 
 GeneralGatewayInfo:
     'url' url=STRING
+    'port' port=INT
     'registerRoute' register=STRING
     'shutdownRoute' shutdown=STRING
     'detectionRoute' detection=STRING
     'alertRoute' alert=STRING;
+
+SensorRegistryInfo:
+    'registryUrl' registryUrl=STRING
+    'key' apiKey=STRING;
 
 GeneralCronjobInfo:
     (('from' from=DAY 'to' to=DAY) | 'every' day=DAY) ((type='at' hour=INT ':' minute=INT) | type='every' value=INT unit=('hours' | 'minutes'));
