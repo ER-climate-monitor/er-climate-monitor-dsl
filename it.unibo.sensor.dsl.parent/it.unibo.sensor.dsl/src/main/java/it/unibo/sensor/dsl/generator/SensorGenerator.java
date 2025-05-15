@@ -85,7 +85,13 @@ public class SensorGenerator extends AbstractSensorGenerator {
      * that matches the expected format in the template).
      */
     private String getFormattedQueries(final List<Query> queries) {
-        final var qs = queries.stream().map(q -> "\"" + q.getName() + "\"").collect(Collectors.joining(", "));
+        final var qs = queries.stream().map(q -> {
+            final var name = "\"" + q.getName() + "\"";
+            final var threshold = q.getValue();
+            final var operator = q.getComparator().getLiteral();
+            return String.format("Query('%s', %s, " + threshold + ")", operator, name);
+
+        }).collect(Collectors.joining(", "));
         return String.format("[ %s ]", qs);
     }
 }
