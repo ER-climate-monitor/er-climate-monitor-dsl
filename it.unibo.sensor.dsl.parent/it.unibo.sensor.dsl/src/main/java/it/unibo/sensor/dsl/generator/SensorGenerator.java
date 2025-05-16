@@ -41,7 +41,7 @@ public class SensorGenerator extends AbstractSensorGenerator {
         // TODO: correctly represent cronjob into python template
         final String type = cronjob.getType();
         final Map<String, String> map = new HashMap<>();
-        if (type.equals("at")){
+        if (type.equals("every")){
             final String unit = cronjob.getUnit().toLowerCase();
             String hours, minute;
             if (unit.equals("minute")) {
