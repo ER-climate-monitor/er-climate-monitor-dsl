@@ -12,6 +12,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 /**
@@ -76,28 +77,24 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
 
     @Check(CheckType.FAST)
     public void ensureCronJobIsValid(@NonNull GeneralCronjobInfo info) {
-        final List<String> days = List.of("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
         if (Objects.nonNull(info.getFrom())) {
-            final String fromDay = info.getFrom().toString().toLowerCase();
-            final String toDay = info.getTo().toString().toLowerCase();
-            if (days.indexOf(fromDay) > days.indexOf(toDay)) {
+            if (DayUtils.getIndex(info.getFrom()) > DayUtils.getIndex(info.getTo())) {
                 error("The end day must come after the starting day.", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__FROM);
             }
         }
         final String type = info.getType().toLowerCase();
         if (type.equals("at")) {
-            final int hour = info.getHour();
-            final int minute = info.getMinute();
+            final String hour = info.getHour();
+            final String minute = info.getMinute();
             if (!TimeUtils.isHourValid(hour) || !TimeUtils.isMinuteValid(minute)) {
                 error("The hour must be in the range [0, 23] and the minute in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__TYPE);
             }
         } else {
-            final int value = info.getValue();
+            final String value = info.getValue();
             final String unit = info.getUnit().toLowerCase();
-            System.out.println(unit);
-            if (unit.equals("minute") && !TimeUtils.isMinuteValid(value)) {
+            if (unit.equals("minute") && !TimeUtils.isMinuteValid(value) && !value.isEmpty()) {
                 error("The minute must be in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
-            } else if (!TimeUtils.isHourValid(value)){
+            } else if (!TimeUtils.isHourValid(value) || value.isEmpty()){
                 error("The hour must be in the range [0, 23].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
             }
         }

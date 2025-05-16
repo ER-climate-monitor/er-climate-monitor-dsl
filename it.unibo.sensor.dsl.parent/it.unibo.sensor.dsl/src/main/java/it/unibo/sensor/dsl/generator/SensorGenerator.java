@@ -1,12 +1,14 @@
 package it.unibo.sensor.dsl.generator;
 
 import it.unibo.sensor.dsl.sensorDSL.*;
+import it.unibo.sensor.dsl.validation.DayUtils;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,7 +39,32 @@ public class SensorGenerator extends AbstractSensorGenerator {
 
     private Map<String, String> getCronJobInfoReplacements(final GeneralCronjobInfo cronjob) {
         // TODO: correctly represent cronjob into python template
-        return Map.of();
+        final String type = cronjob.getType();
+        final Map<String, String> map = new HashMap<>();
+        if (type.equals("at")){
+            final String unit = cronjob.getUnit().toLowerCase();
+            String hours, minute;
+            if (unit.equals("minute")) {
+                hours = "*";
+                minute = cronjob.getValue();
+            } else {
+                hours = cronjob.getValue();
+                minute = "*";
+            }
+            map.put("SENSOR_CRONJOB_HOUR", hours);
+            map.put("SENSOR_CRONJOB_MINUTE",minute);
+        } else {
+            map.put("SENSOR_CRONJOB_HOUR", cronjob.getHour());
+            map.put("SENSOR_CRONJOB_MINUTE", cronjob.getMinute());
+        }
+        String dayFormat = "";
+        if (cronjob.getRepeat().equals("from")){
+            dayFormat = DayUtils.dayRange(cronjob.getFrom(), cronjob.getTo());
+        } else {
+            dayFormat = String.valueOf(DayUtils.getIndex(cronjob.getTo()));
+        }
+        map.put("SENSOR_CRONJOB_DAY_OF_WEEK", dayFormat);
+        return map;
     }
 
     private Map<String, String> getGatewayInfoReplacements(final GeneralGatewayInfo gateway) {
