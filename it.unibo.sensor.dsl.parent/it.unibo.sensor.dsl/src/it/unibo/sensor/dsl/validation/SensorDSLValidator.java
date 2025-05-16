@@ -75,11 +75,8 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
 
     @Check(CheckType.FAST)
     public void ensureCronJobIsValid(@NonNull GeneralCronjobInfo info) {
-        final List<String> days = Arrays.stream(DAY.values()).map(Enum::name).map(String::toLowerCase).toList();
         if (Objects.nonNull(info.getFrom())) {
-            final String fromDay = info.getFrom().toString().toLowerCase();
-            final String toDay = info.getTo().toString().toLowerCase();
-            if (days.indexOf(fromDay) > days.indexOf(toDay)) {
+            if (DayUtils.getIndex(info.getFrom()) > DayUtils.getIndex(info.getTo())) {
                 error("The end day must come after the starting day.", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__FROM);
             }
         }
