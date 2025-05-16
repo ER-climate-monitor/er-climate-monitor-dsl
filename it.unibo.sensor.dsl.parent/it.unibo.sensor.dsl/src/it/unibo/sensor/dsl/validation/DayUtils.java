@@ -5,7 +5,7 @@ import it.unibo.sensor.dsl.sensorDSL.DAY;
 import java.util.List;
 
 public class DayUtils {
-    private static List<DAY> days = List.of(DAY.values());
+    private static final List<DAY> days = List.of(DAY.values());
     public static Integer getIndex(final DAY day) {
         return days.indexOf(day);
     }
