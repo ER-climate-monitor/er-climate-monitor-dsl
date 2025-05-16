@@ -23,6 +23,9 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: move to project directory
+        run: cd it.unibo.sensor.dsl.parent/
+
       - name: execute permission for gradlew
         run: chmod +x ./gradlew
 
