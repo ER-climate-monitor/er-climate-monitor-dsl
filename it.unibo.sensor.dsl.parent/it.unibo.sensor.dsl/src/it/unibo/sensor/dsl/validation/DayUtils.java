@@ -5,8 +5,9 @@ import it.unibo.sensor.dsl.sensorDSL.DAY;
 import java.util.List;
 
 public class DayUtils {
+    private static List<DAY> days = List.of(DAY.values());
     public static Integer getIndex(final DAY day) {
-        return List.of(DAY.values()).indexOf(day);
+        return days.indexOf(day);
     }
 
     public static String dayRange(final DAY from, final DAY to) {
