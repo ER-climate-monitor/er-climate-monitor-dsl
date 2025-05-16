@@ -38,7 +38,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: shadowJar
-          path: ../staging
+          path: staging
           retention-days: 1
 
       - name: create GitHub release
