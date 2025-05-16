@@ -28,10 +28,19 @@ jobs:
           cd it.unibo.sensor.dsl.parent/
           chmod +x ./gradlew
           ./gradlew shadowJar
+          mkdir ../staging
+          cp it.unibo.sensor.dsl/build/libs/*.jar ../staging 
+          mv ../staging/it.unibo.sensor.dsl-1.0.0-SNAPSHOT.jar ../staging/sensorDsl-${{ env.build-number }}.jar
 
       - name: zip source code
         run: |
           git archive --format=zip --output=source.zip HEAD
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shadowJar
+          path: staging
+          retention-days: 1
 
       - name: create GitHub release
         uses: softprops/action-gh-release@v2
@@ -39,6 +48,6 @@ jobs:
           name: Release ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
           files: |
-            build/libs/*.jar
+            staging/*.jar
             source.zip
 
