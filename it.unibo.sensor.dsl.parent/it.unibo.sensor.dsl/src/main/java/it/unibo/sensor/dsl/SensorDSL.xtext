@@ -37,7 +37,7 @@ SensorRegistryInfo:
     'key' apiKey=STRING;
 
 GeneralCronjobInfo:
-    (('from' from=DAY 'to' to=DAY) | 'every' day=DAY) ((type='at' hour=INT ':' minute=INT) | type='every' value=INT unit=('hours' | 'minutes'));
+    (('from' from=DAY 'to' to=DAY) | 'every' day=DAY) ((type='at' hour=STRING ':' minute=STRING) | type='every' value=STRING unit=('hours' | 'minutes'));
 
 
 enum DAY:
