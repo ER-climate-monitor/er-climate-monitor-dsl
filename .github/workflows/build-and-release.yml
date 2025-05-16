@@ -1,0 +1,47 @@
+name: Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Build and Release DSL
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: move to project directory
+        run: cd it.unibo.sensor.dsl.parent/
+
+      - name: execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: build shadowJar
+        run: ./gradlew shadowJar
+
+      - name: zip source code
+        run: |
+          git archive --format=zip --output=source.zip HEAD
+
+      - name: create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: |
+            build/libs/*.jar
+            source.zip
+
