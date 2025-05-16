@@ -29,6 +29,6 @@
     }
     
     cronjob {
-        from friday to saturday at 12:00
+        from friday to saturday at "12":"00"
     }
 }
