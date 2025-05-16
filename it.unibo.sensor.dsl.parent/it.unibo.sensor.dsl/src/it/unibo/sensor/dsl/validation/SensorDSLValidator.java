@@ -84,18 +84,18 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
         }
         final String type = info.getType().toLowerCase();
         if (type.equals("at")) {
-            final int hour = info.getHour();
-            final int minute = info.getMinute();
+            final String hour = info.getHour();
+            final String minute = info.getMinute();
             if (!TimeUtils.isHourValid(hour) || !TimeUtils.isMinuteValid(minute)) {
                 error("The hour must be in the range [0, 23] and the minute in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__TYPE);
             }
         } else {
-            final int value = info.getValue();
+            final String value = info.getValue();
             final String unit = info.getUnit().toLowerCase();
             System.out.println(unit);
-            if (unit.equals("minute") && !TimeUtils.isMinuteValid(value)) {
+            if (unit.equals("minute") && !TimeUtils.isMinuteValid(value) && !value.isEmpty()) {
                 error("The minute must be in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
-            } else if (!TimeUtils.isHourValid(value)){
+            } else if (!TimeUtils.isHourValid(value) || value.isEmpty()){
                 error("The hour must be in the range [0, 23].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
             }
         }
