@@ -9,6 +9,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,7 +75,7 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
 
     @Check(CheckType.FAST)
     public void ensureCronJobIsValid(@NonNull GeneralCronjobInfo info) {
-        final List<String> days = List.of("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday");
+        final List<String> days = Arrays.stream(DAY.values()).map(Enum::name).map(String::toLowerCase).toList();
         if (Objects.nonNull(info.getFrom())) {
             final String fromDay = info.getFrom().toString().toLowerCase();
             final String toDay = info.getTo().toString().toLowerCase();
@@ -92,7 +93,6 @@ public class SensorDSLValidator extends AbstractSensorDSLValidator {
         } else {
             final String value = info.getValue();
             final String unit = info.getUnit().toLowerCase();
-            System.out.println(unit);
             if (unit.equals("minute") && !TimeUtils.isMinuteValid(value) && !value.isEmpty()) {
                 error("The minute must be in the range [0, 59].", info, SensorDSLPackage.Literals.GENERAL_CRONJOB_INFO__VALUE);
             } else if (!TimeUtils.isHourValid(value) || value.isEmpty()){
