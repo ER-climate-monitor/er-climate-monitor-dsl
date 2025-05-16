@@ -25,7 +25,7 @@ jobs:
 
       - name: build shadowJar
         run: |
-          cd sensor-generator
+          cd it.unibo.sensor.dsl.parent/
           chmod +x ./gradlew
           ./gradlew shadowJar
 
