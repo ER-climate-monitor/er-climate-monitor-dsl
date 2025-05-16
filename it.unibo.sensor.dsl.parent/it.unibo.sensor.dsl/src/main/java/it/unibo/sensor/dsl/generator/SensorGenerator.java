@@ -1,6 +1,7 @@
 package it.unibo.sensor.dsl.generator;
 
 import it.unibo.sensor.dsl.sensorDSL.*;
+import it.unibo.sensor.dsl.validation.DayUtils;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
@@ -42,11 +43,27 @@ public class SensorGenerator extends AbstractSensorGenerator {
         final Map<String, String> map = new HashMap<>();
         if (type.equals("at")){
             final String unit = cronjob.getUnit().toLowerCase();
+            String hours, minute;
             if (unit.equals("minute")) {
-                map.put("SENSOR_CRONJOB_HOUR", "*");
-                map.put("SENSOR_CRONJOB_MINUTE", "");
+                hours = "*";
+                minute = cronjob.getValue();
+            } else {
+                hours = cronjob.getValue();
+                minute = "*";
             }
+            map.put("SENSOR_CRONJOB_HOUR", hours);
+            map.put("SENSOR_CRONJOB_MINUTE",minute);
+        } else {
+            map.put("SENSOR_CRONJOB_HOUR", cronjob.getHour());
+            map.put("SENSOR_CRONJOB_MINUTE", cronjob.getMinute());
         }
+        String dayFormat = "";
+        if (cronjob.getRepeat().equals("from")){
+            dayFormat = DayUtils.dayRange(cronjob.getFrom(), cronjob.getTo());
+        } else {
+            dayFormat = String.valueOf(DayUtils.getIndex(cronjob.getTo()));
+        }
+        map.put("SENSOR_CRONJOB_DAY_OF_WEEK", dayFormat);
         return map;
     }
 
