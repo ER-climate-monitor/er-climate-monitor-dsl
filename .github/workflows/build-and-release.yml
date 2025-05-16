@@ -23,14 +23,11 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: move to project directory
-        run: cd it.unibo.sensor.dsl.parent/
-
-      - name: execute permission for gradlew
-        run: chmod +x ./gradlew
-
       - name: build shadowJar
-        run: ./gradlew shadowJar
+        run: |
+          cd sensor-generator
+          chmod +x ./gradlew
+          ./gradlew shadowJar
 
       - name: zip source code
         run: |
