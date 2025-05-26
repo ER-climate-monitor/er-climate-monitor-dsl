@@ -27,7 +27,7 @@ jobs:
         run: |
           cd it.unibo.sensor.dsl.parent/
           chmod +x ./gradlew
-          ./gradlew shadowJar
+          ./gradlew :it.unibo.sensor.dsl:shadowJar
           mkdir ../staging
           cp it.unibo.sensor.dsl/build/libs/*.jar ../staging 
           mv ../staging/it.unibo.sensor.dsl-1.0.0-SNAPSHOT.jar ../staging/sensorDsl-${{ env.build-number }}.jar
