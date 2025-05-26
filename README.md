@@ -3,6 +3,24 @@ Domain Specific Language for sensors configuration
 
 ## Usage
 
+### Writing with the DSL
+
+A web based playground can be used in order to write correct sensor's configurations. The editor
+is a slightly modified version of the Xtext default one, and can be easily used through
+the following docker container:
+
+```
+docker run -p 8080:8080 --name deleteme sfuri/er-climate-monitor-dsl-editor:1.0.3
+```
+
+Then visit [http://localhost:8080](http://localhost:8080) on your machine.
+
+Once the sensor configuration does not show any error, it can be pasted
+into a `<my-sensor-config>.uanciutri` file and can be later processed
+with the next steps.
+
+### Conversion
+
 In order to convert a `.unaciutri` DSL file, you can choose between the following two options.
 
 ### Jar
