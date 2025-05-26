@@ -25,7 +25,7 @@ public class ServerLauncher {
 	private static final Logger LOG = LoggerFactory.getLogger(ServerLauncher.class);
 	
 	public static void main(String[] args) {
-		Server server = new Server(new InetSocketAddress("localhost", 8080));
+		Server server = new Server(new InetSocketAddress("0.0.0.0", 8080));
 		WebAppContext ctx = new WebAppContext();
 		
 		try {
