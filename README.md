@@ -10,7 +10,7 @@ is a slightly modified version of the Xtext default one, and can be easily used 
 the following docker container:
 
 ```
-docker run -p 8080:8080 --name deleteme sfuri/er-climate-monitor-dsl-editor:1.0.3
+docker run -p 8080:8080 --name deleteme sfuri/er-climate-monitor-dsl-editor:1.0.4
 ```
 
 Then visit [http://localhost:8080](http://localhost:8080) on your machine.
