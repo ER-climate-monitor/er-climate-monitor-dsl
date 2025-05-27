@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public abstract class AbstractSensorGenerator extends AbstractGenerator {
@@ -34,9 +36,17 @@ public abstract class AbstractSensorGenerator extends AbstractGenerator {
     }
 
     protected static String replace(String template, final Map<String, String> replacements) {
-        for (var e: replacements.entrySet()) {
-            template = template.replace("{{ " + e.getKey() + " }}", e.getValue());
+        final Pattern pattern = Pattern.compile("\\{\\{\\s*(\\w+)\\s*}}");
+        final Matcher matcher = pattern.matcher(template);
+        final StringBuilder result = new StringBuilder();
+
+        while (matcher.find()) {
+            String key = matcher.group(1);
+            String replacement = replacements.getOrDefault(key, matcher.group(0));
+            matcher.appendReplacement(result, Matcher.quoteReplacement(replacement));
         }
-        return template;
+
+        matcher.appendTail(result);
+        return result.toString();
     }
 }
