@@ -30,7 +30,7 @@ jobs:
           ./gradlew :it.unibo.sensor.dsl:shadowJar
           mkdir ../staging
           cp it.unibo.sensor.dsl/build/libs/*.jar ../staging 
-          mv ../staging/it.unibo.sensor.dsl-1.0.0-SNAPSHOT.jar ../staging/sensorDsl-${{ env.build-number }}.jar
+          mv ../staging/it.unibo.sensor.dsl-1.0.0-SNAPSHOT.jar ../staging/sensorDsl-${{ github.ref_name }}.jar
 
       - name: zip source code
         run: |
