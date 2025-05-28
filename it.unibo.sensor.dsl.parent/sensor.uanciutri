@@ -1,33 +1,33 @@
 {
-    name "Diga di Ridracoli"
+    name "Cesena"
     infos {
-        description "Sensore idrometrico diga di Ridracoli"
+        description "Sensore idrometrico fiume Savio, Cesena (Ponte Nuovo)"
         type idro_level
         queries [
-            - threshold "soglia90%" > "570"
-            - threshold "soglia100%" > "575"
+            - threshold "soglia15%" > "2.0"
+            - threshold "soglia100%" > "7.8"
         ]
     }
-    
+
     network {
         port 1926
-        ip "10.100.101.24"
+        ip "10.100.101.241"
     }
-    
+
     gateway {
-        url "localhost"
-        port 3000
+        url "api-gateway-17633123551.europe-west8.run.app"
+        port 8080
         registerRoute "/register"
         shutdownRoute "/shutdown"
         detectionRoute "/detection"
         alertRoute "/alert"
     }
-    
+
     registry {
-        registryUrl "localhost/v0/api/sensor"
+        registryUrl "sensor-registry-17633123551.europe-west8.run.app/v0/sensor"
         key "secretKey"
     }
-    
+
     cronjob {
         from friday to saturday at "12":"00"
     }
