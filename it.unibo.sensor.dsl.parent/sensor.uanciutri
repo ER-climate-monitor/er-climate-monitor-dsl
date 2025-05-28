@@ -4,7 +4,7 @@
         description "Sensore idrometrico fiume Savio, Cesena (Ponte Nuovo)"
         type idro_level
         queries [
-            - threshold "soglia15%" > "2.0"
+            - threshold "soglia10%" > "1.0"
             - threshold "soglia100%" > "7.8"
         ]
     }
@@ -24,11 +24,12 @@
     }
 
     registry {
-        registryUrl "sensor-registry-17633123551.europe-west8.run.app/v0/sensor"
+        registryUrl "https://sensor-registry-17633123551.europe-west8.run.app/v0/sensor"
         key "secretKey"
     }
 
     cronjob {
-        from friday to saturday at "12":"00"
+        from monday to saturday at "*":"*"
     }
 }
+
