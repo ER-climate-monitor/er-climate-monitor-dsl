@@ -103,16 +103,13 @@ public class SensorGenerator extends AbstractSensorGenerator {
         );
     }
 
-    /**
-     * NOTE: here logic does not account for thresholds and custom queries, they will require
-     * a rewrite of the python sensor template. By now alert queries are entirely regulated by the
-     * real world sensor that backs this sensor.
-     *
-     * In future version, a full query parsing must be made and yield a string of valid python (or at least,
-     * that matches the expected format in the template).
-     */
     private String getFormattedQueries(final List<Query> queries) {
-        final var qs = queries.stream().map(q -> "\"" + q.getName() + "\"").collect(Collectors.joining(", "));
+        final var qs = queries.stream().map(q -> {
+            final var name = "\"" + q.getName() + "\"";
+            final var threshold = q.getValue();
+            final var operator = q.getComparator().getLiteral();
+            return String.format("Query('%s', %s, " + threshold + ")", operator, name);
+        }).collect(Collectors.joining(", "));
         return String.format("[ %s ]", qs);
     }
 }
