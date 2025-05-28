@@ -11,7 +11,7 @@
 
     network {
         port 1926
-        ip "10.100.101.241"
+        ip "127.0.0.1"
     }
 
     gateway {
