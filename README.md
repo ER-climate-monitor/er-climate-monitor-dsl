@@ -32,7 +32,7 @@ wget https://github.com/ER-climate-monitor/er-climate-monitor-dsl/releases/downl
 
 And simply run
 ```bash
-java -jar sensorDsl-.jar <absolute_dsl_file_path> <absolute_output_path>`
+java -jar sensorDsl-v0.2.6.jar <absolute_dsl_file_path> <absolute_output_path>`
 ```
 
 ### Using sources
