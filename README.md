@@ -27,7 +27,7 @@ In order to convert a `.unaciutri` DSL file, you can choose between the followin
 
 Download the jar of the latest release with:
 ```bash
-wget https://github.com/S-furi/er-climate-monitor-dsl/releases/download/<latest_version>/sensorDsl-.jar
+wget https://github.com/ER-climate-monitor/er-climate-monitor-dsl/releases/download/<latest_version>/sensorDsl-.jar
 ```
 
 And simply run
